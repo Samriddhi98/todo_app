@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:todo_app/injection_container.dart';
 
 import 'core/theme/app_custom_theme.dart';
 import 'core/theme/light_theme.dart';
+import 'features/todo/data/models/todo_hive_model.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Hive.initFlutter();
+  Hive.registerAdapter(TodoHiveModelAdapter());
   init();
+
   runApp(const MyApp());
 }
 
