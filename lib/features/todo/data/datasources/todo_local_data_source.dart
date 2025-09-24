@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:hive/hive.dart';
+import 'package:todo_app/core/error/exceptions.dart';
 import 'package:todo_app/features/todo/data/models/todo_hive_model.dart';
 
 abstract class TodoLocalDataSource {
-  Future<List<TodoHiveModel>> getTasks();
+  List<TodoHiveModel> getTasks();
   Future<void> addTask(TodoHiveModel task);
   Future<void> updateTask(TodoHiveModel task);
   Future<void> deleteTask(String id);
@@ -13,26 +16,43 @@ class TodoLocalDataSourceImpl implements TodoLocalDataSource {
   TodoLocalDataSourceImpl({required this.box});
 
   @override
-  Future<void> addTask(TodoHiveModel task) {
-    // TODO: implement addTask
-    throw UnimplementedError();
+  Future<void> addTask(TodoHiveModel task) async {
+    try {
+      await box.put(task.id, task);
+    } catch (e) {
+      log('write exception $e');
+      throw WriteException();
+    }
   }
 
   @override
-  Future<void> deleteTask(String id) {
-    // TODO: implement deleteTask
-    throw UnimplementedError();
+  Future<void> deleteTask(String id) async {
+    try {
+      await box.delete(id);
+    } catch (e) {
+      log('write exception $e');
+      throw DeleteException();
+    }
   }
 
   @override
-  Future<List<TodoHiveModel>> getTasks() {
-    // TODO: implement getTasks
-    throw UnimplementedError();
+  List<TodoHiveModel> getTasks() {
+    try {
+      final todos = box.values.toList();
+      return todos;
+    } catch (e) {
+      log('read exception $e');
+      throw ReadException();
+    }
   }
 
   @override
-  Future<void> updateTask(TodoHiveModel task) {
-    // TODO: implement updateTask
-    throw UnimplementedError();
+  Future<void> updateTask(TodoHiveModel task) async {
+    try {
+      await task.save();
+    } catch (e) {
+      log('update exception $e');
+      throw UpdateException();
+    }
   }
 }

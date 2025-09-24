@@ -10,11 +10,21 @@ import 'package:todo_app/features/todo/domain/usecases/update_todo_usecase.dart'
 
 import 'features/todo/data/datasources/todo_local_data_source.dart';
 import 'features/todo/data/models/todo_hive_model.dart';
+import 'features/todo/presentation/bloc/todo_bloc.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
   /// bloc
+  sl.registerFactory<TodoBloc>(
+    () => TodoBloc(
+      addTodo: sl(),
+      getTodos: sl(),
+      removeTodo: sl(),
+      updateTodo: sl(),
+    ),
+  );
+
   /// Usecases
   sl.registerLazySingleton<GetTodoListUsecase>(
     () => GetTodoListUsecase(todoRepository: sl()),
@@ -44,5 +54,5 @@ Future<void> init() async {
 
   /// External
 
-  sl.registerLazySingleton(() => LightTheme());
+  sl.registerLazySingleton<LightTheme>(() => LightTheme());
 }

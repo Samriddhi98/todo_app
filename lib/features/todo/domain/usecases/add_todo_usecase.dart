@@ -10,9 +10,8 @@ class AddTodoUsecase implements UseCase<bool, AddTodoParams> {
   AddTodoUsecase({required this.todoRepository});
 
   @override
-  Future<Either<Failure, bool>> call(AddTodoParams params) {
-    // TODO: implement call
-    throw UnimplementedError();
+  Future<Either<Failure, bool>> call(AddTodoParams params) async {
+    return await todoRepository.addTask(params.todo);
   }
 }
 

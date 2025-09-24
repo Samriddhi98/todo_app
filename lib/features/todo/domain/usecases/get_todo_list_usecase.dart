@@ -9,8 +9,7 @@ class GetTodoListUsecase implements UseCase<List<TodoEntity>, NoParams> {
 
   GetTodoListUsecase({required this.todoRepository});
   @override
-  Future<Either<Failure, List<TodoEntity>>> call(NoParams params) {
-    // TODO: implement call
-    throw UnimplementedError();
+  Future<Either<Failure, List<TodoEntity>>> call(NoParams params) async {
+    return todoRepository.getTasksList();
   }
 }

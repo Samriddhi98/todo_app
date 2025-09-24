@@ -42,6 +42,8 @@ dependencies:
   get_it: ^8.2.0
   dartz: ^0.10.1
   animated_bottom_navigation_bar: ^1.4.0
+  intl: ^0.20.2
+  dropdown_button2: ^2.3.9
 
 dev_dependencies:
   flutter_test:
