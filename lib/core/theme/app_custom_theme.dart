@@ -29,13 +29,13 @@ class AppTheme {
         primary: sl<LightTheme>().quatenaryColor.withAlpha(
           100,
         ), //header and selced day background color
-        onPrimary: sl<LightTheme>().primaryColor, // titles and
-        onSurface: sl<LightTheme>().secondaryColor, // Month days , years
+        //   onPrimary: sl<LightTheme>().primaryColor, // titles and
+        //onSurface: sl<LightTheme>().secondaryColor, // Month days , years
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor:
-              sl<LightTheme>().secondaryColor, // ok , cancel    buttons
+              sl<LightTheme>().quatenaryColor, // ok , cancel    buttons
         ),
       ),
     );

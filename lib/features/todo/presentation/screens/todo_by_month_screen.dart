@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/features/todo/presentation/bloc/todo_bloc.dart';
-import 'package:todo_app/features/todo/presentation/screens/todo_list_screen.dart';
+import 'package:todo_app/features/todo/presentation/widgets/todo_loaded_section.dart';
 
 class TodosByMonthView extends StatefulWidget {
   final int months;
@@ -108,7 +108,9 @@ class _TodosByMonthViewState extends State<TodosByMonthView> {
                       final month = state.groupedTodos.keys.elementAt(index);
                       final todosForMonth = state.groupedTodos[month];
                       if (todosForMonth == null || todosForMonth.isEmpty) {
-                        return Center(child: Text('No todos added for this month yet'));
+                        return Center(
+                          child: Text('No todos added for this month yet'),
+                        );
                       } else {
                         return TodoLoadedSection(
                           todoList: todosForMonth,
