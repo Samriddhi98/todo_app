@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:todo_app/features/todo/presentation/bloc/todo_bloc.dart';
+import 'package:todo_app/features/todo/presentation/bloc/todo_bloc/todo_bloc.dart';
 import 'package:todo_app/injection_container.dart';
 
 import 'core/observer/app_bloc_observer.dart';

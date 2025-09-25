@@ -1,4 +1,4 @@
-# 📋 Todo App
+#  Todo App
 
 A **Flutter-based Todo application** built with **Clean Architecture** and **Bloc state management**.  
 The app allows users to create, update, mark complete/incomplete, and organize tasks efficiently.  
@@ -6,7 +6,7 @@ Tasks can also be grouped by due dates (e.g., monthly) for better task managemen
 
 ---
 
-## ✨ Features
+## Features
 - Add new tasks with **title, description, priority, and due date**
 - Mark tasks as **completed or incomplete**
 - Update or delete existing tasks
@@ -16,7 +16,7 @@ Tasks can also be grouped by due dates (e.g., monthly) for better task managemen
 
 ---
 
-## 🏛️ Project Structure (Clean Architecture)
+## Project Structure (Clean Architecture)
 
 ```
 lib/
@@ -38,7 +38,7 @@ lib/
 ├── main.dart             # Entry point
 ```
 
-### 🔹 Layers Explained
+###  Layers Explained
 - **Data Layer**
     - Responsible for Hive integration and mapping models.
     - Implements repository interfaces from the domain layer.
@@ -54,7 +54,7 @@ lib/
 
 ---
 
-## ⚙️ Tech Stack
+##  Tech Stack
 - **Flutter** (Dart)
 - **Bloc** (State Management)
 - **Hive** (Local Storage)
@@ -63,7 +63,7 @@ lib/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Install [Flutter SDK](https://docs.flutter.dev/get-started/install)
@@ -95,7 +95,7 @@ lib/
 ---
 
 
-## 📂 Future Enhancements
+## Future Enhancements
 - Add calendar integration
 - Add task categories/tags
 - Sync tasks with cloud (Firebase)
@@ -103,5 +103,5 @@ lib/
 
 ---
 
-## 📝 License
+## License
 This project is licensed under the MIT License.  

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:todo_app/features/todo/presentation/bloc/todo_bloc.dart';
+import 'package:todo_app/features/todo/presentation/bloc/filter_bloc/filter_bloc.dart';
+import 'package:todo_app/features/todo/presentation/bloc/todo_bloc/todo_bloc.dart';
+import 'package:todo_app/features/todo/presentation/widgets/pop_up_menu.dart';
 import 'package:todo_app/features/todo/presentation/widgets/todo_loaded_section.dart';
 
 class TodosByMonthView extends StatefulWidget {
@@ -89,11 +91,11 @@ class _TodosByMonthViewState extends State<TodosByMonthView> {
               IconButton(
                 icon: const Icon(Icons.arrow_forward_ios),
                 iconSize: 20,
-
                 onPressed: _nextPage,
               ),
             ],
           ),
+          FilterOptionWidget(),
           // PageView for month-based tasks
           Expanded(
             child: BlocBuilder<TodoBloc, TodoState>(
@@ -112,9 +114,19 @@ class _TodosByMonthViewState extends State<TodosByMonthView> {
                           child: Text('No todos added for this month yet'),
                         );
                       } else {
-                        return TodoLoadedSection(
-                          todoList: todosForMonth,
-                          month: month,
+                        return BlocBuilder<FilterBloc, FilterState>(
+                          builder: (context, state) {
+                            if (state is FilterApplied) {
+                              return TodoLoadedSection(
+                                todoList: state.todoList,
+                                month: month,
+                              );
+                            }
+                            return TodoLoadedSection(
+                              todoList: todosForMonth,
+                              month: month,
+                            );
+                          },
                         );
                       }
                     },

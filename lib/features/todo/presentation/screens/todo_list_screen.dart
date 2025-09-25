@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:todo_app/core/theme/light_theme.dart';
 import 'package:todo_app/core/utils/ui_helper.dart';
 import 'package:todo_app/features/todo/domain/entities/todo_entity.dart';
-import 'package:todo_app/features/todo/presentation/bloc/todo_bloc.dart';
+import 'package:todo_app/features/todo/presentation/bloc/todo_bloc/todo_bloc.dart';
 import 'package:todo_app/features/todo/presentation/screens/todo_by_month_screen.dart';
 import 'package:todo_app/injection_container.dart';
 

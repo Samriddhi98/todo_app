@@ -10,7 +10,7 @@ import 'package:todo_app/features/todo/domain/usecases/update_todo_usecase.dart'
 
 import 'features/todo/data/datasources/todo_local_data_source.dart';
 import 'features/todo/data/models/todo_hive_model.dart';
-import 'features/todo/presentation/bloc/todo_bloc.dart';
+import 'features/todo/presentation/bloc/todo_bloc/todo_bloc.dart';
 import 'features/todo/presentation/bloc/toggle_bloc/toggle_bloc.dart';
 
 final sl = GetIt.instance;

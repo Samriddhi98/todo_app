@@ -6,6 +6,8 @@ class AppTheme {
   static ThemeData baseTheme() {
     final baseTheme = ThemeData(
       useMaterial3: true,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       // primaryColor: context.watch<AppThemeCubit>().state.primaryColor,
       // scaffoldBackgroundColor: context
       //     .watch<AppThemeCubit>()

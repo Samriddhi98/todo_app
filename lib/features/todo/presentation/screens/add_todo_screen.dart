@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:todo_app/core/theme/light_theme.dart';
 import 'package:todo_app/features/todo/domain/entities/enum/task_priority.dart';
 import 'package:todo_app/features/todo/domain/entities/todo_entity.dart';
-import 'package:todo_app/features/todo/presentation/bloc/todo_bloc.dart';
+import 'package:todo_app/features/todo/presentation/bloc/todo_bloc/todo_bloc.dart';
 import 'package:todo_app/features/todo/presentation/widgets/app_text_button.dart';
 import 'package:todo_app/features/todo/presentation/widgets/custom_text_form_field.dart';
 import 'package:todo_app/features/todo/presentation/widgets/due_date_picker.dart';
