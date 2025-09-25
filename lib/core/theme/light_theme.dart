@@ -13,7 +13,7 @@ class LightTheme implements ColorPallete {
   Color get mediumPriority => Color(0xffF7C732);
 
   @override
-  Color get primaryColor => Color(0xffFFFFFF);
+  Color get primaryColor => Color(0xffF2F2F2);
 
   @override
   Color get secondaryColor => Color(0xff1D1B4D);
