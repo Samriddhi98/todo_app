@@ -13,6 +13,20 @@ class TodoLoading extends TodoState {}
 
 class TodoAdded extends TodoState {}
 
+class TodoUpdated extends TodoState {}
+
+class TodoRemoved extends TodoState {}
+
+class TodoEmpty extends TodoState {}
+
+class ToggleCompletion extends TodoState {
+  final TodoEntity todo;
+  const ToggleCompletion(this.todo);
+
+  @override
+  List<Object?> get props => [todo];
+}
+
 class TodoLoaded extends TodoState {
   final List<TodoEntity> todos;
   const TodoLoaded(this.todos);

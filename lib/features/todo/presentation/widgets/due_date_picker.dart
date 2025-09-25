@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_app/core/theme/light_theme.dart';
 import 'package:todo_app/injection_container.dart';
 
@@ -18,15 +19,26 @@ class _DueDatePickerState extends State<DueDatePicker> {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: _selectedDate ?? DateTime.now(),
-      firstDate: DateTime(2000),
+      firstDate: DateTime.now(),
       lastDate: DateTime(2100),
     );
 
     if (picked != null && picked != _selectedDate) {
       setState(() {
-        _selectedDate = picked;
+        widget.dateController.text = DateFormat("dd MMM yyyy").format(picked);
       });
     }
+  }
+
+  @override
+  void initState() {
+    if (widget.dateController.text.isNotEmpty) {
+      _selectedDate = DateTime.tryParse(widget.dateController.text);
+      widget.dateController.text = DateFormat(
+        "dd MMM yyyy",
+      ).format(_selectedDate!);
+    }
+    super.initState();
   }
 
   @override

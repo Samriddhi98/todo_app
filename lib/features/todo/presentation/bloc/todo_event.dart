@@ -40,3 +40,9 @@ class DeleteTodo extends TodoEvent {
   @override
   List<Object?> get props => [id];
 }
+
+class ToggleTodoEvent extends TodoEvent {
+  final String id;
+  final bool isCompleted;
+  const ToggleTodoEvent(this.id, this.isCompleted);
+}

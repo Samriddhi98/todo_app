@@ -1,6 +1,8 @@
+import 'dart:async';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_app/core/usecases/usecase.dart';
+import 'package:todo_app/constants/sample_tasks.dart';
 import 'package:todo_app/core/utils/id_generator.dart';
 import 'package:todo_app/features/todo/domain/entities/enum/task_priority.dart';
 import 'package:todo_app/features/todo/domain/entities/todo_entity.dart';
@@ -28,19 +30,35 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     on<AddTodo>(_onAddTodo);
     on<UpdateTodo>(_onUpdateTodo);
     on<DeleteTodo>(_onDeleteTodo);
+    on<ToggleTodoEvent>(_onToggleTodoCompletion);
   }
+
+  List<TodoEntity> todoList = [];
 
   Future<void> _onLoadTodos(LoadTodos event, Emitter<TodoState> emit) async {
     emit(TodoLoading());
-    final result = await getTodos.call(NoParams());
-    result.fold(
-      (failure) => emit(TodoError("Failed to load todos")),
-      (todos) => emit(TodoLoaded(todos)),
-    );
+    if (todoList.isEmpty) {
+      todoList.addAll(sampleTodos);
+    } else {
+      todoList
+        ..clear()
+        ..addAll(sampleTodos);
+    }
+    emit(TodoLoaded(todoList));
+    // final result = await getTodos.call(NoParams());
+    // result.fold((failure) => emit(TodoError("Failed to load todos")), (todos) {
+    //   if (todos.isEmpty) {
+    //     emit(TodoEmpty());
+    //   } else {
+    //     emit(TodoLoaded(todos));
+    //   }
+    // });
   }
 
   Future<void> _onAddTodo(AddTodo event, Emitter<TodoState> emit) async {
     emit(TodoLoading());
+    await Future.delayed(const Duration(seconds: 2));
+
     final todo = TodoEntity(
       id: generateTaskId(),
       title: event.title,
@@ -52,30 +70,57 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     result.fold((failure) => emit(TodoError("Failed to add todo")), (_) {
       emit(TodoAdded());
     });
+    // await Future.delayed(const Duration(seconds: 2));
+    // emit(TodoInitial());
   }
 
   Future<void> _onUpdateTodo(UpdateTodo event, Emitter<TodoState> emit) async {
-    if (state is TodoLoaded) {
-      final currentTodos = List<TodoEntity>.from((state as TodoLoaded).todos);
-      final index = currentTodos.indexWhere((t) => t.id == event.todo.id);
-      if (index != -1) {
-        final result = await updateTodo(UpdateTodoParams(event.todo));
-        result.fold((failure) => emit(TodoError("Failed to update todo")), (_) {
-          currentTodos[index] = event.todo;
-          emit(TodoLoaded(currentTodos));
-        });
-      }
-    }
+    emit(TodoLoading());
+    await Future.delayed(Duration(milliseconds: 500));
+    final index = sampleTodos.indexWhere((t) => t.id == event.todo.id);
+    sampleTodos[index] = event.todo;
+    emit(TodoUpdated());
+
+    // if (index != -1) {
+    //   final result = await updateTodo(UpdateTodoParams(event.todo));
+    //   result.fold((failure) => emit(TodoError("Failed to update todo")), (_) {
+    //     todoList[index] = event.todo;
+    //     emit(TodoUpdated());
+    //   });
+    // }
   }
 
   Future<void> _onDeleteTodo(DeleteTodo event, Emitter<TodoState> emit) async {
-    if (state is TodoLoaded) {
-      final currentTodos = List<TodoEntity>.from((state as TodoLoaded).todos);
-      final result = await removeTodo(RemoveTodoParams(event.id));
-      result.fold((failure) => emit(TodoError("Failed to delete todo")), (_) {
-        currentTodos.removeWhere((t) => t.id == event.id);
-        emit(TodoLoaded(currentTodos));
-      });
+    final index = sampleTodos.indexWhere((t) => t.id == event.id);
+    try {
+      sampleTodos.removeAt(index);
+      emit(TodoRemoved());
+    } catch (e) {
+      emit(TodoError(e.toString()));
     }
+
+    // final result = await removeTodo(RemoveTodoParams(event.id));
+    // result.fold((failure) => emit(TodoError("Failed to delete todo")), (_) {
+    //   todoList.removeWhere((t) => t.id == event.id);
+    //   emit(TodoRemoved());
+    // });
+  }
+
+  FutureOr<void> _onToggleTodoCompletion(
+    ToggleTodoEvent event,
+    Emitter<TodoState> emit,
+  ) {
+    emit(TodoLoading());
+    TodoEntity? updatedTodo;
+    var todo = todoList.firstWhere((todo) {
+      if (todo.id == event.id) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    updatedTodo = todo.copyWith(isCompleted: event.isCompleted);
+    emit(ToggleCompletion(updatedTodo!));
   }
 }

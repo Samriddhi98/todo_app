@@ -33,6 +33,26 @@ class TodoEntity extends Equatable {
     dueDate,
   ];
 
+  TodoEntity copyWith({
+    String? id,
+    String? title,
+    String? description,
+    DateTime? createdAt,
+    bool? isCompleted,
+    TaskPriority? priority,
+    DateTime? dueDate,
+  }) {
+    return TodoEntity(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      createdAt: createdAt ?? this.createdAt,
+      isCompleted: isCompleted ?? this.isCompleted,
+      priority: priority ?? this.priority,
+      dueDate: dueDate ?? this.dueDate,
+    );
+  }
+
   TodoHiveModel toHiveModel() => TodoHiveModel(
     id: id,
     title: title,
