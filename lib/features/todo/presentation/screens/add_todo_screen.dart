@@ -36,7 +36,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
   void initState() {
     if (widget.todo != null) {
       _titleController.text = widget.todo!.title;
-      _descriptionController.text = widget.todo!.description!;
+      _descriptionController.text = widget.todo!.description ?? '';
       _selectedPriority.value = widget.todo!.priority;
       if (widget.todo!.dueDate != null) {
         _dateController.text = widget.todo!.dueDate.toString();
@@ -251,7 +251,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                 ),
               ),
               AnimatedSwitcher(
-                duration: const Duration(milliseconds: 1000),
+                duration: const Duration(milliseconds: 2000),
                 transitionBuilder: (child, animation) =>
                     FadeTransition(opacity: animation, child: child),
                 child: BlocBuilder<TodoBloc, TodoState>(
@@ -328,6 +328,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
               priority: _selectedPriority.value!,
               dueDate: parsedDate,
             ),
+            true,
           ),
         );
       } else {

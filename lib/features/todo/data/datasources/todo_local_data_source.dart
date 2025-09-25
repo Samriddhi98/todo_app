@@ -49,7 +49,7 @@ class TodoLocalDataSourceImpl implements TodoLocalDataSource {
   @override
   Future<void> updateTask(TodoHiveModel task) async {
     try {
-      await task.save();
+      await box.put(task.id, task);
     } catch (e) {
       log('update exception $e');
       throw UpdateException();

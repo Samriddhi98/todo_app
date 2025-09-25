@@ -80,11 +80,11 @@ class _DueDatePickerState extends State<DueDatePicker> {
               widget.dateController.text = value;
             },
             controller: widget.dateController,
-            // controller: TextEditingController(
-            //   text: _selectedDate != null
-            //       ? DateFormat("dd MMM yyyy").format(_selectedDate!)
-            //       : "",
-            // ),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please select a due date';
+              }
+            },
           ),
         ],
       ),

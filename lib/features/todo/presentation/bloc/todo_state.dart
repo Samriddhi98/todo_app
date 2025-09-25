@@ -13,7 +13,13 @@ class TodoLoading extends TodoState {}
 
 class TodoAdded extends TodoState {}
 
-class TodoUpdated extends TodoState {}
+class TodoUpdated extends TodoState {
+  final bool pause;
+  const TodoUpdated(this.pause);
+
+  @override
+  List<Object?> get props => [pause];
+}
 
 class TodoRemoved extends TodoState {}
 
@@ -29,10 +35,11 @@ class ToggleCompletion extends TodoState {
 
 class TodoLoaded extends TodoState {
   final List<TodoEntity> todos;
-  const TodoLoaded(this.todos);
+  final Map<String, List<TodoEntity>> groupedTodos;
+  const TodoLoaded(this.todos, this.groupedTodos);
 
   @override
-  List<Object?> get props => [todos];
+  List<Object?> get props => [todos, groupedTodos];
 }
 
 class TodoError extends TodoState {

@@ -27,7 +27,8 @@ class AddTodo extends TodoEvent {
 
 class UpdateTodo extends TodoEvent {
   final TodoEntity todo;
-  const UpdateTodo(this.todo);
+  final bool fromAddTodoScreen;
+  const UpdateTodo(this.todo, this.fromAddTodoScreen);
 
   @override
   List<Object?> get props => [todo];
@@ -42,7 +43,8 @@ class DeleteTodo extends TodoEvent {
 }
 
 class ToggleTodoEvent extends TodoEvent {
-  final String id;
+  final TodoEntity todo;
+  final List<TodoEntity> associatedTasks;
   final bool isCompleted;
-  const ToggleTodoEvent(this.id, this.isCompleted);
+  const ToggleTodoEvent(this.todo, this.associatedTasks, this.isCompleted);
 }
