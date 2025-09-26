@@ -7,9 +7,18 @@ sealed class FilterEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class ApplyFilterEvent extends FilterEvent {
+class ChangeFilterEvent extends FilterEvent {
   final FilterOptions filter;
+
+  const ChangeFilterEvent({required this.filter});
+
+  @override
+  List<Object?> get props => [filter];
+}
+
+class ApplyFilterEvent extends FilterEvent {
   final List<TodoEntity> todoList;
+  final FilterOptions filter;
 
   const ApplyFilterEvent({required this.filter, required this.todoList});
 

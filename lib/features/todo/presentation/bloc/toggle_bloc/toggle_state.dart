@@ -15,9 +15,11 @@ class ToggleInitial extends ToggleState {
 
 class ToggleUpdated extends ToggleState {
   final TodoEntity todo;
-  const ToggleUpdated(this.todo);
+  final List<TodoEntity> updatedList;
+  final FilterOptions filter;
+  const ToggleUpdated(this.todo, this.updatedList, this.filter);
   @override
-  List<Object?> get props => [todo];
+  List<Object?> get props => [todo, updatedList, filter];
 }
 
 class ToggleError extends ToggleState {

@@ -81,7 +81,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
         todoList
           ..clear()
           ..addAll(todos);
-        final grouped = groupTodosByMonth(todos);
+        final grouped = groupTodosByMonth(todoList);
         groupedByMonth.addAll(grouped);
         emit(TodoLoaded(todoList, grouped));
       }

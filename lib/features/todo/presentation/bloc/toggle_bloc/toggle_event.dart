@@ -10,10 +10,12 @@ sealed class ToggleEvent extends Equatable {
 class ToggleIsCompleteEvent extends ToggleEvent {
   final TodoEntity todo;
   final List<TodoEntity> associatedTasks;
+  final FilterOptions appliedFilter;
   final bool isCompleted;
   const ToggleIsCompleteEvent(
     this.todo,
     this.associatedTasks,
     this.isCompleted,
+    this.appliedFilter,
   );
 }

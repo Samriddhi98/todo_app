@@ -9,6 +9,17 @@ sealed class FilterState extends Equatable {
 
 class FilterInitial extends FilterState {}
 
+class FilterChangedState extends FilterState {
+  final FilterOptions filter;
+
+  const FilterChangedState({required this.filter});
+
+  @override
+  List<Object?> get props => [filter];
+}
+
+class FilterLoading extends FilterState {}
+
 class FilterApplied extends FilterState {
   final FilterOptions filter;
   final List<TodoEntity> todoList;
