@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:todo_app/core/theme/light_theme.dart';
 import 'package:todo_app/core/utils/ui_helper.dart';
 import 'package:todo_app/features/todo/domain/entities/todo_entity.dart';
 import 'package:todo_app/features/todo/presentation/bloc/filter_bloc/filter_bloc.dart';
 import 'package:todo_app/features/todo/presentation/bloc/todo_bloc/todo_bloc.dart';
 import 'package:todo_app/features/todo/presentation/bloc/toggle_bloc/toggle_bloc.dart';
 import 'package:todo_app/features/todo/presentation/screens/todo_by_month_screen.dart';
+import 'package:todo_app/features/todo/presentation/widgets/add_todo_button.dart';
 import 'package:todo_app/injection_container.dart';
-
-import 'add_todo_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -96,26 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
-        floatingActionButton: SizedBox(
-          height: 60.h,
-          width: 60.w,
-          child: FloatingActionButton(
-            backgroundColor: sl<LightTheme>().primaryColor,
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (BuildContext context) => AddTodoScreen(),
-                ),
-              );
-            },
-            shape: CircleBorder(),
-            child: Icon(
-              Icons.edit_note,
-              color: sl<LightTheme>().quatenaryColor,
-              size: 40,
-            ),
-          ),
-        ),
+        floatingActionButton: AddTodoButton(),
       ),
     );
   }
