@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/core/theme/light_theme.dart';
+import 'package:todo_app/injection_container.dart';
 
 class AppTheme {
   static ThemeData baseTheme() {
     final baseTheme = ThemeData(
       useMaterial3: true,
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       // primaryColor: context.watch<AppThemeCubit>().state.primaryColor,
       // scaffoldBackgroundColor: context
       //     .watch<AppThemeCubit>()
@@ -22,6 +26,19 @@ class AppTheme {
         labelLarge: TextStyle(fontSize: 14, fontWeight: FontWeight.normal),
         labelMedium: TextStyle(fontSize: 12, fontWeight: FontWeight.normal),
         labelSmall: TextStyle(fontSize: 8, fontWeight: FontWeight.normal),
+      ),
+      colorScheme: ColorScheme.light(
+        primary: sl<LightTheme>().quatenaryColor.withAlpha(
+          100,
+        ), //header and selced day background color
+        //   onPrimary: sl<LightTheme>().primaryColor, // titles and
+        //onSurface: sl<LightTheme>().secondaryColor, // Month days , years
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          foregroundColor:
+              sl<LightTheme>().quatenaryColor, // ok , cancel    buttons
+        ),
       ),
     );
     return baseTheme.copyWith();
