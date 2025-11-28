@@ -68,14 +68,13 @@ class _TodosByMonthViewState extends State<TodosByMonthView> {
         if (state is TodoLoaded) {
           final month = state.groupedTodos.keys.elementAt(_currentIndex);
           final todosForMonth = state.groupedTodos[month];
-          if (todosForMonth == null || todosForMonth.isEmpty) {
             BlocProvider.of<FilterBloc>(context).add(
               ApplyFilterEvent(
                 filter: BlocProvider.of<FilterBloc>(context).currentFilter,
-                todoList: todosForMonth!,
+                todoList: todosForMonth ?? [],
               ),
             );
-          }
+
         }
       },
       child: Container(
@@ -125,7 +124,7 @@ class _TodosByMonthViewState extends State<TodosByMonthView> {
             ),
             FilterOptionWidget(),
             // PageView for month-based tasks
-            Expanded(
+            Flexible(
               child: BlocConsumer<TodoBloc, TodoState>(
                 listener: (context, state) {},
                 builder: (context, state) {
