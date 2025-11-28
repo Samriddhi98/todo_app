@@ -83,7 +83,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Column(
                         children: [
                           Row(children: [Text('My Todo List')]),
-                          Row(),
                           TodosByMonthView(months: months, todoList: todoList),
                         ],
                       ),
